@@ -1,0 +1,446 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+
+\title{ANAL 2}
+\author{Miroslav D.}
+
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\graphicspath{ {images/} }
+
+
+\begin{document}
+\maketitle
+Tento dokumetn shrnuje látku potřebnou ke zkoužce z MA2 v letech 20/21. Zkoužka se skládá z 5-ti příkladů.
+
+
+% příklad 1
+\section*{Příklad č.1.}
+
+Příklad na aplikaci derivací.
+\begin{itemize}
+  	\item Tečná rovina v bodě na nějakou plochu.
+	\item Největší/nejmenší funkční hodnota na nějakém průsečíku ploch.
+	\item Extrémy nějaké plochy.
+	\item Nějaká "slovní úloha" - největší oběm/plocha nějakého útvaru/tělesa.
+\end{itemize}
+
+\subsection*{Tečná rovina}
+\textbf{Zadání:} elipsoid: \[x^2 + 2y^2 + 3z^2 = 1\] rovina: \[3x - y + 3z  -1 = 0\]
+Najít body na elipsoidu rovnoběžné s rovinou
+
+Ze zadané funkce potřebujeme zjistit gradient - ten nám určuje "spád" tečné roviny v libovolném bodě funkce - podobně jako derivace z analýzy 1. Ten se určuje derivací funkce podle x, y, z.
+\[ \frac{\partial F}{\partial x} = 2x \]
+\[ \frac{\partial F}{\partial y} = 4y \]
+\[ \frac{\partial F}{\partial z} = 6z \]
+
+Dále ze zadané roviny zjistíme normálový vektor - to je jednoduché, rovnice roviny je pomocí normálového vektoru popsána.
+\[\vec{n} = (3, -1, 3)\]
+
+Teď zjistíme kdy se gradient a normálový vektor + lambda rovnají a dosadíme do rovnice plochy
+\[\lambda (3, -1, 3) = (2x, 4y, 6z)\]
+\[x=\frac{3}{2}\lambda \]
+\[y=-\frac{1}{4}\lambda \]
+\[z=\frac{1}{2}\lambda \]
+
+Dosadíme do rovnice plochy 
+
+\[\left(\frac{3}{2}\lambda \right)^2 + 2\left(-\frac{1}{4}\lambda \right)^2 + 3\left(\frac{1}{2}\lambda \right)^2 = 1\]
+
+Spočítáme
+
+\[\lambda = \pm \frac{2\sqrt{2}}{5} \]
+
+dosadíme zpět a máme výsledek
+
+\[A_1 = \left(\frac{3\sqrt{2}}{5},  -\frac{\sqrt{2}}{10}, \frac{\sqrt{2}}{5}\right), A_2 = \left(-\frac{3\sqrt{2}}{5},  \frac{\sqrt{2}}{10}, -\frac{\sqrt{2}}{5}\right) \]
+
+\subsection*{Extrémy plochy}
+Je to podobné jako extrémy v MA1, ale tady hledáme plochy rovnoběžné s plochou xy.
+
+Lokální extrémy funkce $z = 4x - 3x^3 - 2xy^2$
+Zderivujeme funkci
+\[\begin{aligned}
+\frac{\partial F}{\partial x} &= 4 - 9x^2 - 2y^2 = 0 \\
+\frac{\partial F}{\partial y} &= -4xy = 0
+\end{aligned}\]
+
+Z druhé rovnice x = 0 a y = 0, dosadíme do první, vyjde nám $(0, \pm \sqrt{2})$ a $(\pm \frac{2}{3}, 0)$
+Teď musíme zjistit, jestli se jedná o maximum/minimum, nebo jestli to je vůbec extrém, k tomu ná poslouží Hessova matice (asi ne podle toho nácka xd).
+Je to symetrická matice.
+
+Tohle je pro 3 x 3 matici 
+\[\begin{pmatrix}
+\frac{\partial F}{\partial x^2} & \frac{\partial F}{\partial x \partial y} & \frac{\partial F}{\partial x \partial z}\\
+\frac{\partial F}{\partial y \partial x} & \frac{\partial F}{\partial y^2} & \frac{\partial F}{\partial y \partial z}\\
+\frac{\partial F}{\partial z \partial x} & \frac{\partial F}{\partial z \partial y} & \frac{\partial F}{\partial z^2}
+\end{pmatrix}\]
+
+Tohle je pro 2 x 2 matici 
+
+\[\begin{pmatrix}
+\frac{\partial F}{\partial x^2} & \frac{\partial F}{\partial x \partial y}\\
+\frac{\partial F}{\partial y \partial x} & \frac{\partial F}{\partial y^2} 
+\end{pmatrix}\]
+
+
+Po dosezení dostáváme
+\[\begin{pmatrix}
+-18x & -4y\\
+-4y & -4x 
+\end{pmatrix}
+\approx 
+\begin{pmatrix}
+-9x & -2y\\
+-2y & -2x
+\end{pmatrix}\]
+
+Teď se dosazujou hodnoty těch extrémů co vyšly před tim a počítaj se determinanty - nejdřív $1\times1$ matice (ta nahoře vlevo), potom $2\times2$ (potom$3\times3$).
+D1 je determinant matice $1\times1$, D2 je detrminant matice$2\times2$.
+\[(0, -\sqrt{2}) \to
+\begin{vmatrix}
+0 & -2\sqrt{2}\\
+-2\sqrt{2} & 0 
+\end{vmatrix} \to
+D_1 = 0, D_2 = - 8\]
+
+\[(0, \sqrt{2}) \to
+\begin{vmatrix}
+0 & 2\sqrt{2}\\
+2\sqrt{2} & 0 
+\end{vmatrix} \to
+D_1 = 0, D_2 = - 8\]
+
+\[\left(-\frac{2}{3}, 0\right) \to
+\begin{vmatrix}
+-6 & 0\\
+0 & -\frac{4}{3} 
+\end{vmatrix} \to
+D_1 = -6, D_2 = 8\]
+
+\[\left(\frac{2}{3}, 0\right) \to
+\begin{vmatrix}
+6 & 0\\
+0 & \frac{4}{3} 
+\end{vmatrix} \to
+D_1 = 6, D_2 = 8\]
+
+
+Teď jenom stačí rozlišit kdy je extrém - fancy se tomu řiká sylvestrovo kritérum. Když jsou všechny determinanty kladný - jedná se o lokální minimum, 
+když se znaménka determinantů střídají a první determinant je záporný, jedná se o lokální extrém.
+Když determinant není nulový a neplatí žádná s předchozích, jedná se o sedlový bod (není to minimum ani maximum).
+Když je nějaký diskriminant nula, tak sylvestrovo kritérium nemůže rozhodnout a musíme extrém určit jinak (např. po křivkách).
+Maximum je bod $(\frac{2}{3},0)$, minimum je bod $(-\frac{2}{3},0)$
+
+\subsection*{Největší/nejmenší funkční hodnota}
+V zadání jsou dvě funkce, f ve tvaru $f(x_1, ......, x_n)$ a $g(x_1, ......, x_n) = a$
+Sestaví se lagrangeova funkce $L =f(x_1, ......, x_n)  + \lambda g(x_1, ......, x_n - a)$ a řeší se to dost podobně jako extrémy.
+
+Příklados:
+Zjistěte nejmenší a největší hodnotu funkce  $f(x,y) = xy$ v bodech elipsy $x^2 + 2y^2 = 1$. Sestavíme lagreangovu funkci.
+
+\[L = xy = \lambda(x^2 + 2y^2 - 1)\]
+
+\[\begin{aligned}
+\frac{\partial L}{\partial x} & = y = 2\lambda x\\
+\frac{\partial L}{\partial y} & = x = 4\lambda y\\
+\frac{\partial L}{\partial \lambda} &= x^2 + 2y^2 -1 = 0
+\end{aligned}\]
+
+Vyřešíme - $(\pm \frac{1}{\sqrt{2}}, \frac{1}{2} )$, $(\pm \frac{1}{\sqrt{2}}, -\frac{1}{2})$, Nejvyšší a nejnižší hodnotu získáme dosazenim.
+
+maximum - $\pm(\frac{1}{\sqrt{2}}, \frac{1}{2} )$,  minimum - $\pm( - \frac{1}{\sqrt{2}}, \frac{1}{2} )$
+
+\subsection*{Slovní úloha}
+Je to prakticky úloha na sestavení lagreangovy funkce, je víc přemýšlicí.
+\newline
+
+
+Příklad: $54\pi cm^3$ - objem plechovky, dno a víko je z materiálu za 0.25 Kč/$cm^3$, plášť z materiálu za 0.5 Kč/$cm^3$. Nalezněte rozměry, tak aby byla cena minimální.
+
+Sestavíme lagreangovu funkci.
+\[L = 0.25\cdot 2 \pi r^2 + 2\pi r h 0.5 - \lambda(\pi r^2 h - 54 \pi)\]
+$2 \pi r^2$ je plocha víka a dna, $ 2 \pi r $ je plocha pláště, oběm plechovky je $\pi r^2 h = 54 \pi$
+Zderivujeme
+
+\[\begin{aligned}
+\frac{\partial L}{\partial x} & = r + h -2 \lambda r = 0\\
+\frac{\partial L}{\partial y} & = r - \lambda r^2= 0\\
+\frac{\partial L}{\partial \lambda} &= r^2 h = 54
+\end{aligned}\]
+
+Spočítáme, výsledek je h = r = $\sqrt[3]{54}$ = $3\sqrt[3]{2}$
+
+% příklad 2
+
+\section*{Příklad č.2.}
+
+\subsection*{Prohození pořadí integrace}
+
+Nejlepší je si nakreslit obrázek - funkce nejsou tak složité aby to nešlo, v nouzi se dá použít kalkulačka - náčrtek nemusí být tak přesný, čtyři funkční hodnoty pro slozitěší funkce by na to měly stačit.
+
+Příklad:
+\[\int_1^2\int_1^{\sqrt{5-x^2}}  f dy dx\]
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\textwidth]{geogebr}
+\end{figure}
+
+\subsection*{Přehození integrálu}
+
+integrál si můžeme představit jako \[\int_{x = 1}^{x = 2}\int_{y = 1}^{y = \sqrt{5-x^2}}  f dy dx\]
+Je vidět, že chtěná plocha je v útvaru mezi body A, B, C.
+Teď potřebujeme integraci přehodit tak, aby vnější integrál byl podle y a vnitřní podle x.
+Funkce je ohraničená podle y = 2 a y = 1 - vnější integrál bude vypadat stejně.
+X je tedy ohraničeno podle x = 1 a oblouku - vyjádříme ho pomocí x. \[x = \sqrt{5-y^2}\]
+Tady pozor na + nebo -, z obrázku se to dá poznat jednoduše, podle toho v jakém kvadrantu je útvar.
+Napíšeme výsledek
+
+\[\int_1^2\int_1^{\sqrt{5-y^2}}  f dy dx\]
+
+\subsection*{Polární souřadnice}
+
+Zase nám pomůže obrázek. $\varphi$ je úhel odkud kam budeme integrovat - z obrázku vidíme, že to jsou body C a B - spočítáme si úhel. $\tan \varphi_1 = 2$, $\tan \varphi_2 = \frac{1}{2}$.
+Je tady ale malej prank, když přecházíme přes bod A, tak se nám změní dolní hranice pro $\rho$, proto musíme integrál rozdělit na dva. Funkce si vyjádříme pomocí polárních souřadnic.
+
+\[\int_{\frac{\pi}{4}}^{arctg 2}   \int_{\frac{1}{\cos{\varphi}}}^{\sqrt{5}}  f    d\rho d\varphi +  \int_{arctg \frac{1}{2}}^{\frac{\pi}{4}} \int_{\frac{1}{\sin{\varphi}}}^{\sqrt{5}}  f d\rho d\varphi   \]
+
+% příklad 3
+
+\section*{Příklad č.3.}
+
+Aplikace různých typů integrálů
+
+\begin{itemize}
+	\item Gaussova věta
+  	\item Greenova věta
+	\item Stokesova věta
+	\item Těžiště tělesa
+	\item Moment hybnosti tělesa
+\end{itemize}
+
+
+
+\subsection*{Gaussova věta}
+Pomocí Gaussovy věty se počítá tok pole nějakým tělesem.
+Potřebujeme zjistit divergenci vektorového pole(vynásobit skálárně nabla operátorem), potom "jenom" spočítat objemový integrál toho pole.
+Nezapomenout na jakobiány při převádění na jiné souřadnicové systémy.
+Pro cylindrickou a polární je jakobián $\rho$.
+Pro sférickou $\rho^2 \sin \theta$
+
+
+Příklad: pomocí Gaussovy věty spočítejte tok pole $\vec{F}$ orientovanou plochou M. $\vec{F} = (0, 0, \frac{1}{3}z^3)$, M je sféra $x^2 + y^2 + z^2 = r^2$.
+
+\[\nabla \vec{F} = \frac{\partial \vec{F_1}}{\partial x} + \frac{\partial \vec{F_2}}{\partial y} + \frac{\partial \vec{F_3}}{\partial z} = z^2\]
+
+Protože se jedná o sféru, převedeme si souřadnice na sférické.
+\[x = \rho \sin \theta \cos \varphi \]
+\[y = \rho \sin \theta \sin \varphi \]
+\[z = \rho \cos \theta \]
+
+\[z^2 = \rho^2 \cos^2 \theta \]
+
+Nakonec sestavíme trojný integrál. Dobré je si představit jak se ty meze vytváří.
+Nejdříve opíšeme kružnici pomocí $\theta$, to je od $0$ do $2\pi$.
+Dál vyplníme celou tuto kružnici od počátku do poloměru, $\rho$ je od $0$ do $r$.
+A nakonec tu krožnici rotujeme - stačí nám ale jen $180^{\circ}$ na vyplnění celé koule, takže $\theta$ je od $0$ do $\pi$.
+Nezapomenout vynásobit jakobiánem. Spočítáme.
+\[\int_0^\pi\int_0^r\int_0^{2\pi}  \rho^4 \cos^2 \theta \sin \theta d\varphi d\rho d\varphi = \frac{4 \pi}{15}r^5\]  
+
+
+\subsection*{Greenova věta}
+Greenova věta je Stokesova věta ve 2D.
+Greenova věta nám převádí křivkový integrál 2. druhu po uzavřené křivce na dvojný integrál.
+
+\[ \oint_c (L dx + M dy) = \iint_D \left(\frac{\partial M}{\partial x} - \frac{\partial L}{\partial y} \right) dx dy\]
+
+Příklad: Pomocí Greenovy věty spočítejte jaká práce se vykoná při pohybu bodu o hmotnosti m = 1 po obvodu trjúhelníku s vrcholy (0,0), (3,0) a (3,3). Pohyb se děje v kladném smyslu v poli $\vec{F} = (y^2 - x^3, x^2 - y^3)$
+
+\[\begin{pmatrix}
+\frac{\partial F}{\partial x} & \frac{\partial F}{\partial y}\\
+y^2 - x^3 & x^2 - y^3
+\end{pmatrix} = 2x - 2y\]
+
+Sestavíme integrál a spočítáme.
+
+\[\int_0^3 \int_0^x 2x - 2y  dy dx = 9\]
+
+\subsection*{Stokesova věta}
+Stokesova věta je Greenova věta ve 3D.
+\subsection*{Těžiště tělesa}
+Těžiště se určuje pomocí vzorců
+\[x_t = \frac{\iint_M x_\rho}{\iint_M \rho}, \qquad y_t = \frac{\iint_M y_\rho}{\iint_M \rho}\]
+
+Příklad: Najděte těžiště kužele P = $ \{ (x, y, z) \in  \mathbb{R}^3 | \sqrt{x^2 + y^2} \leq z \leq h \} $ je-li hustota v bodě (x, y, z) rovna jeho vzdálenosti od roviny xy.
+
+Protože kužel symetrické těleso, můžeme z-tovou složku zanedbat. Potřebujeme spočítat tři dvojné integrály.
+
+\subsection*{Moment hybnosti tělesa}
+% příklad 4
+
+\section*{Příklad č.4.}
+
+Vyšetřování potenciálních polí
+
+Prvním krokem, je vždy zjistit, jestli (nebo kdy) je pole potenciální - zrotujeme pole (vektorově ho vynásobíme s nabla operátorem), když nám vyjde 0, tak je pole potenciální (případně zvolíme hodnotu tak aby potenciální bylo).
+
+Zjistěte, které z polí $\vec{F} = (y + z, x + z, x + y)$ a $\vec{G} = (x, yz^2, 3)$ je potenciální a nalezněte jeho potenciál.
+
+
+\[\vec{\nabla} \times \vec{F} = \begin{vmatrix} e_1 & e_2 & e_3 \\
+\frac{\partial F}{\partial x} & \frac{\partial F}{\partial y} & \frac{\partial F}{\partial z} \\ 
+y + z & x + z &  x + y\end{vmatrix} = (1-1)e_1 + (1-1)e_2 + (1-1)e_3 = 0\]
+
+\[\vec{\nabla} \times \vec{G} = \begin{vmatrix} e_1 & e_2 & e_3 \\
+\frac{\partial F}{\partial x} & \frac{\partial F}{\partial y} & \frac{\partial F}{\partial z} \\ 
+y & yz^2 &  3\end{vmatrix} = (0-2z)e_1 + (0-0)e_2 + (0-1)e_3 = (-2z, 0, -1)\]
+
+Potenciální je jen pole F.
+
+Spočítání potenciálu. Složky pole se rovnají parciální derivaci.
+
+\[(1) \quad \frac{\partial F}{\partial x} = y + z \]
+\[(2) \quad  \frac{\partial F}{\partial y} = x + z \]
+\[(3) \quad  \frac{\partial F}{\partial z} = x + y \]
+
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=red,      
+    urlcolor=cyan,
+    }
+
+Je to celkem jednoduchý algoritmus, je vypsaný pod textem, pokusim se ho nějak popsat, nejlepší je na to asi \href{https://www.youtube.com/watch?v=vSN8DivqVpQ&list=PLQL6z4JeTTQne5N_yD6X-hK3FW57rAb5b&index=19}{video od Doc. Bohaty}. Vezmeme první řádek, který zintegrujem, tím zjistíme kolik se rovná první řádek.
+Potřebujeme zjistit kolik je $C_1$, tak zderivujeme první řádek podle y - všechny proměnné z pravé strany by se měli vykrátit - nenarazil jsem ještě na příklad kde by to tak nebylo, je možný, že je to tim, že je to pole potenciální.
+Zjistíme integrací kolik je $C_1$ a dosadíme to do prvního řádku, takhle to vlastně opakujeme až do konce.
+
+$$
+\begin{aligned}
+1. \quad F(x, y, z) &= xy + xz + c_1(yz) \\
+2. \quad x + \frac{\partial c_1}{\partial y} &= x + y\\
+3. \quad \frac{\partial c_1}{\partial y} &= z\\
+4. \quad c_1 &= yz + c_2(z)\\
+5. \quad F(x, y, z) &= xy + xz +  yz + c_2(z) \\
+6. \quad x + y \frac{\partial c_2}{\partial z} &= x + y\\
+7. \quad c_2 &= 0 + c\\
+8. \quad F(x, y, z) &= xy + xz +  yz + c
+\end{aligned}
+$$
+Toto je výsledný potenciál
+
+
+
+
+
+
+
+
+% příklad 5
+
+\section*{Příklad č.5}
+
+Fourierova nebo Taylorova řada
+
+\subsection*{Taylorova řada}
+Taylorova řada převádí funkce na nějaký nekonečný součet.
+Důležité vzorce - bývají tam napsány a dají se odvodit, přesto bych si je radši zapamatoval.
+
+\[\begin{aligned}
+\frac{1}{x+1} &= \sum_{n=0}^{\infty} x^n, \quad x \in \langle -1, 1 )\\
+e^x &= \sum_{n=0}^{\infty} \frac{x^n}{x!}, \quad x \in \mathbb{R} \\
+\sin x &= \sum_{n=0}^{\infty} (-1)^n \frac{x^{2n+1}}{(2n+1)!}, \quad x \in \mathbb{R}\\
+cos x &= \sum_{n=0}^{\infty}  (-1)^n \frac{x^{2n}}{(2n)!}, \quad x \in \mathbb{R}\\
+\ln(1+x) &= \sum_{n=0}^{\infty} \frac{(-1)^{n-1}}{n}x^n, \quad x \in \langle -1, 1 )\\
+(1+x)^{\alpha} &= \sum_{n=0}^{\infty}\begin{pmatrix}a\\b  \end{pmatrix} x^n, \quad x \in \langle -1, 1 ), \alpha \in \mathbb{R}
+\end{aligned}\]
+
+V zádání je nějaká funkce, kterou pomocí těhle vzorečků, upravíme na nekonečnou řadu, hledá se potom poloměr konvergence R.
+
+\[R= \frac{1}{q}\]
+\[q = \lim_{x\to\infty} \sqrt[n]{f(x)} = \lim_{x\to\infty} \frac{f(x(n+1))}{f(x(n))}\]
+Prostě je to něco jako podílové a odmocninové kritérium v MA1
+
+
+\subsection*{Fourierova řada}
+Tady se "jenom" dosazuje do vzorečků
+
+
+
+\[a_0 = \frac{2}{T} \int_0^T f(x) dx\]
+\[a_k = \frac{2}{T} \int_0^T f(x) \cos \left(\frac{2 \pi k}{T}x \right) dx\]
+\[b_k = \frac{2}{T} \int_0^T f(x) \sin \left(\frac{2 \pi k}{T}x \right) dx\]
+To se potom celý dosadí sem
+
+\[\frac{a_0}{2} + \sum_{k=0}^{\infty}(a_k \cos(kx) + b_k \sin (kx))\]
+
+Tady je nějaký seznam vztahů - není to tak těžký, jdou vymyslet na místě
+
+$\newline$
+$\cos(\pi k) = cos(-\pi k) = (-1)^n$ -  nejlepší je si to představit na jednotkové kružnici, v celých násobcích $\pi$ se střídá hodnota -1 a 1 - toho docílíme právě pomocí $(-1)^n$
+
+$\newline$
+$\sin(\pi k) = \sin(-\pi k) = 0$, sinus v celých násobcích $\pi$ nabývá nuly
+
+$\newline$
+$(-1)^n \cdot  (-1)^{n+1} = -1$, pro sudá n je $(-1)^n$ kladné a  $(-1)^{n+1}$ záporné a pro lichá n je to právě naopak - výsledek je -1
+
+$\newline$
+$-(-1)^n = (-1)^{n+1}$
+
+
+
+
+
+
+\section*{Další příklady s postupem}
+
+Zjistěte, zda je pole $\vec{F} = \left(\ln(1 + z), 2yz, \frac{x}{1 + z} + y^2\right)$ potenciální a v kladném případě nalezněte jeho potenciál.
+
+
+\[\vec{\nabla} \times \vec{F} = \begin{vmatrix} e_1 & e_2 & e_3 \\
+\frac{\partial F}{\partial x} & \frac{\partial F}{\partial y} & \frac{\partial F}{\partial z} \\ 
+\ln(1 + z) & 2yz &  \frac{x}{1+z} + y^2 \end{vmatrix} = (2y - 2y)e_1 + \left(\frac{1}{1 + z} - \frac{1}{1 + z}\right)e_2 + (0 - 0)e_3 = 0 \]
+Pole je potencionální
+
+\[(1) \quad \frac{\partial F}{\partial x} = \ln(1+z) \]
+\[(2) \quad  \frac{\partial F}{\partial y} = 2yz \]
+\[(3) \quad  \frac{\partial F}{\partial z} = \frac{x}{1 + z} + y^2\]
+
+$$
+\begin{aligned}
+1. \quad F(x, y, z) &= x \ln(1 + z) + c_1(y, z) \\
+2. \quad \frac{\partial c_1}{\partial y} &= 2yz\\
+3. \quad c_1(y,z) &= y^2z + c_2(z)\\
+4. \quad F(x, y, z) &= x \ln(1 + z) + y^2z + c_2(z) \\
+5. \quad \frac{x}{1 + z} + y^2 \frac{\partial c_2}{\partial z} &= \frac{x}{1 + z} + y^2\\
+6. \quad c_2 &= 0 + c\\
+7. \quad F(x, y, z) &= x\ln(1 + z) + y^2z + c
+\end{aligned}
+$$
+Toto je výsledný potenciál
+
+
+
+
+Přepište následující integrál
+\[\int_1^2 \int_0^{2-x} f dy dx\]
+nejprve v opačném pořádí integrace a pak v polárních souřadnicích se středem v počátku v pořadí ${d\rho d\varphi}$
+
+
+\begin{center}
+	\begin{tikzpicture}
+		\draw[thick, ->](-0.1,0) -- (2,0) node[below] {$x$};
+		\draw[thick,->](0,-0.3) node[align = left, below] {$O$} -- (0,2) node[left] {$y$};
+		\draw[domain=-1:3] plot ({\x}, {2-\x});
+		\draw[domain=-1:2, variable=\y] plot ({1}, {\y});
+		\draw[domain=-1:2, variable=\y] plot ({2}, {\y});
+	\end{tikzpicture}
+\end{center}
+
+\end{document}
